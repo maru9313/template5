@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<!-- Strutsの詳細設定 -->
+<struts>
+	<constant name="struts.devMode" value="true" />
+	<!-- 対象のpackageを設定 -->
+	<package name="com.internousdev.template.action" extends="struts-default">
+
+		<!-- HomeAction -->			<!-- ① -->
+		<action name="HomeAction" class="com.internousdev.template.action.HomeAction" method="execute">
+			<!-- ↑が選択されたら(ここから) -->				<!-- ↑ここに飛ぶ -->
+			<result name="success">login.jsp</result> 
+		<!-- ↑この結果が出たら -->	<!-- ↑ここに飛ぶ -->
+		</action>
+		
+		
+		
+		<!-- UserCreateAction -->		<!-- ② -->
+		<action name="UserCreateAction" class="com.internousdev.template.action.UserCreateAction" method="execute">
+			<result name="success">userCreate.jsp</result>
+			<result name="back">login.jsp</result>
+		</action>
+		
+		<!-- UserCreateConfirmAction -->		<!-- ③ -->
+		<action name="UserCreateConfirmAction" class="com.internousdev.template.action.UserCreateConfirmAction" method="execute">
+			<result name="success">userCreateConfirm.jsp</result>
+			<result name="error">userCreate.jsp</result>
+		</action>
+	
+		<!-- UserCreateComplateAction -->		<!-- ④ -->			<!-- ←ここまでが新規登録 -->
+		<action name="UserCreateComplateAction" class="com.internousdev.template.action.UserCreateComplateAction" method="execute">
+			<result name="success">userCreateComplate.jsp</result>
+		</action>
+		
+		<!-- LoginAction -->		<!-- ←新規で作成した後購入画面へ -->
+		<action name="LoginAction" class="com.internousdev.template.action.LoginAction" method="execute">
+			<result name="success">buyItem.jsp</result>
+			<result name="create">userCreate.jsp</result>
+			<result name="error">home.jsp</result>
+		</action>
+		
+		<!-- BuyItemAction -->		<!-- 買うものを選んだ後、確認画面へ -->
+		<action name="BuyItemAction" class="com.internousdev.template.action.BuyItemAction" method="execute">
+			<result name="success">buyItemConfirm.jsp</result>
+			<result name="error">buyItem.jsp</result>
+		</action>
+		
+		<!-- BuyItemConfirmAction -->	<!-- ←購入完了画面へ -->
+		<action name="BuyItemConfirmAction" class="com.internousdev.template.action.BuyItemConfirmAction" method="execute">
+			<result name="success">buyItemComplate.jsp</result>
+			<result name="back">buyItem.jsp</result>
+		</action>
+		
+		<!-- MyPageAction -->		<!-- マイページに飛ぶ -->
+		<action name="MyPageAction" class="com.internousdev.template.action.MyPageAction" method="execute">
+			<result name="success">myPage.jsp</result>
+		</action>
+		
+		<!-- LogoutAction -->
+		<action name="LogoutAction" class="com.internousdev.template.action.LogoutAction" method="execute">
+			<result name="success">home.jsp</result>
+		</action>
+		
+	</package>
+</struts>
